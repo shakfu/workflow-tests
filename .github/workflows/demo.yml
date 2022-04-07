@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       print_modules:
-        description: 'True to print to STDOUT'
+        description: 'True to print modules to STDOUT'
         required: true 
         type: boolean 
       modules:
@@ -12,8 +12,8 @@ on:
         type: string
 
 jobs:
-  print-tag:
-    runs-on: ubuntu-latest
+  custom-pip:
+    runs-on: macos-10.15
     steps:
       - name: install a package
         run: pip install ${{ github.event.inputs.modules }}
