@@ -19,11 +19,7 @@ jobs:
         run: pip3 install ${{ github.event.inputs.modules }}
 
       - name: Display the path and version
-        shell: python3
-        run: |
-          import os, platform
-          print(os.environ['PATH'])
-          print(platform.python_version())
+        run: python3 --version
 
       - name: display pip packages
         if:  ${{ github.event.inputs.print_modules == 'true' }} 
