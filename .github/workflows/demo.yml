@@ -2,32 +2,32 @@ name: demo-inputs
 on:
   workflow_dispatch:
     inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'warning' 
-        type: choice
-        options:
-        - info
-        - warning
-        - debug 
-      print_tags:
+      print_modules:
         description: 'True to print to STDOUT'
         required: true 
         type: boolean 
-      tags:
-        description: 'Test scenario tags'
+      modules:
+        description: 'python packages for pip'
         required: true 
         type: string
-      # environment:
-      #   description: 'Environment to run tests against'
-      #   type: environment
-      #   required: true 
 
 jobs:
   print-tag:
     runs-on: ubuntu-latest
-    if:  ${{ github.event.inputs.print_tags == 'true' }} 
     steps:
-      - name: Print the input tag to STDOUT
-        run: echo  The tags are ${{ github.event.inputs.tags }} 
+      - name: install a package
+        run: pip install ${{ github.event.inputs.modules }}
+
+      - name: Display the path and version
+        shell: python
+        run: |
+          import os, platform
+          print(os.environ['PATH'])
+          print(platform.python_version())
+
+      - name: display pip packages
+        if:  ${{ github.event.inputs.print_modules == 'true' }} 
+        run: pip list
+
+
+
