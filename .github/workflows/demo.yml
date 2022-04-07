@@ -16,10 +16,10 @@ jobs:
     runs-on: macos-10.15
     steps:
       - name: install a package
-        run: pip install ${{ github.event.inputs.modules }}
+        run: pip3 install ${{ github.event.inputs.modules }}
 
       - name: Display the path and version
-        shell: python
+        shell: python3
         run: |
           import os, platform
           print(os.environ['PATH'])
@@ -27,7 +27,7 @@ jobs:
 
       - name: display pip packages
         if:  ${{ github.event.inputs.print_modules == 'true' }} 
-        run: pip list
+        run: pip3 list
 
 
 
